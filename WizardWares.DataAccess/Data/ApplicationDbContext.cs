@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WizardWares.Models;
 
 
 namespace WizardWares.DataAccess.Data
@@ -14,5 +10,7 @@ namespace WizardWares.DataAccess.Data
         {
 
         }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }

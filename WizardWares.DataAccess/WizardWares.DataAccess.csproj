@@ -20,4 +20,8 @@
     <Folder Include="Repositiory\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WizardWares.Models\WizardWares.Models.csproj" />
+  </ItemGroup>
+
 </Project>
