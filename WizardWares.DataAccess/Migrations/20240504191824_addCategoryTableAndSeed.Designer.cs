@@ -11,8 +11,8 @@ using WizardWares.DataAccess.Data;
 namespace WizardWares.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240501173233_AddCategoryTableToDb")]
-    partial class AddCategoryTableToDb
+    [Migration("20240504191824_addCategoryTableAndSeed")]
+    partial class addCategoryTableAndSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
