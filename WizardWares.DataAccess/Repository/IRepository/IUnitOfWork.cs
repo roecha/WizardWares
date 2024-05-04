@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WizardWares.DataAccess.Repositiory.IRepository
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
         ICategoryRepository Category { get; }
 
