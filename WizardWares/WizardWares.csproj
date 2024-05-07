@@ -13,17 +13,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WizardWares.DataAccess\WizardWares.DataAccess.csproj" />
     <ProjectReference Include="..\WizardWares.Models\WizardWares.Models.csproj" />
     <ProjectReference Include="..\WizardWares.Utility\WizardWares.Utility.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Customer\Controllers\" />
-    <Folder Include="Areas\Customer\Views\" />
   </ItemGroup>
 
 </Project>
