@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WizardWares.Models
 {
-    internal class Product
+    public class Product
     {
         [Key]
         public int Id { get; set; }
@@ -17,10 +19,11 @@ namespace WizardWares.Models
 
         public double PriceMoney { get; set; }
         public string PriceObject { get; set; }
-        //public int CategoryId { get; set; }
-        //[ForeignKey("CategoryId")]
-        //[ValidateNever]
-        //public Category Category { get; set; }
-        //[ValidateNever]
+
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        [ValidateNever]
+        public Category Category { get; set; }
+        [ValidateNever]
         public string ImageUrl { get; set; }
     }}
