@@ -8,16 +8,16 @@ namespace WizardWares.Areas.Admin.Controllers
     [Area("Admin")]
     public class CategoryController : Controller
     {
-       // private readonly IUnitOfWork _unitOfWork;
-        public CategoryController()
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-          //  _unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
             // Use entitiy framework core to retrieve the list
-            
-            return View();
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
+            return View(objCategoryList);
         }
     }
 }
