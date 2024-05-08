@@ -34,6 +34,9 @@ namespace WizardWares.DataAccess.Repository
                 if (obj.ImageUrl != null)
                 {
                     objFromDb.ImageUrl = obj.ImageUrl;
+                } else
+                {
+                    objFromDb.ImageUrl = "";
                 }
             }
         }
