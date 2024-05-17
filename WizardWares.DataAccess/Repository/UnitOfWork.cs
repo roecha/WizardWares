@@ -15,12 +15,14 @@ namespace WizardWares.DataAccess.Repositiory
         private ApplicationDbContext _db;
         public ICategoryRepository Category { get; private set; }
         public IProductRepository Product { get; private set; }
+        public IRarityRepository Rarity { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Category = new CategoryRepository(_db);
             Product = new ProductRepository(_db);
+            Rarity = new RarityRepository(_db);
         }
 
         public void Save()

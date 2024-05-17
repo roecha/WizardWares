@@ -13,6 +13,7 @@ namespace WizardWares.DataAccess.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Rarity> Rarities { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
@@ -28,8 +29,9 @@ namespace WizardWares.DataAccess.Data
                     Id = 1,
                     Name = "inferior health potion",
                     Description = "Drink this potion to recover 50 health.",
-                    PriceMoney = 15,
-                    PriceObject = "A piece of hidden lore",
+                    Price = 15,
+                    Rarity = "Inferior",
+                    TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
                 },
@@ -38,8 +40,9 @@ namespace WizardWares.DataAccess.Data
                     Id = 2,
                     Name = "inferior stamina potion",
                     Description = "Drink this potion to recover 50 stamina.",
-                    PriceMoney = 15,
-                    PriceObject = "A piece of hidden lore",
+                    Price = 15,
+                    Rarity = "Inferior",
+                    TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
                 },
@@ -48,12 +51,23 @@ namespace WizardWares.DataAccess.Data
                     Id = 3,
                     Name = "inferior mana potion",
                     Description = "Drink this potion to recover 50 mana.",
-                    PriceMoney = 15,
-                    PriceObject = "A piece of hidden lore",
+                    Price = 15,
+                    Rarity = "Inferior",
+                    TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
                 }
             );
+
+            modelBuilder.Entity<Rarity>().HasData(
+                new Rarity
+                {
+                    Id = 1,
+                    Name = "Common",
+                    ColorCode = "1111111",
+                    ValueOrder = 1
+                }
+            ); ;
         }
     }
 }

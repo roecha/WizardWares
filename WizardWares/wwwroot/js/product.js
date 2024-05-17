@@ -9,8 +9,9 @@ function loadDataTable() {
         "ajax": { url: '/admin/product/getall' },
         "columns": [
             { data: 'name', "width": "25%" },
-            { data: 'priceMoney', "width": "10%" },
-            { data: 'priceObject', "width": "20%" },
+            { data: 'price', "width": "10%" },
+            { data: 'tradeItem', "width": "20%" },
+            { data: 'rarity', "width": "20%" },
             { data: 'category.name', "width": "15%" },
             {
                 data: 'id',

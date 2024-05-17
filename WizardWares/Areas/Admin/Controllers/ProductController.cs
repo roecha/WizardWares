@@ -39,6 +39,13 @@ namespace WizardWares.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
+
+                RarityList = new List<SelectListItem> {
+                    new SelectListItem { Value = "1", Text = "Common" },
+                    new SelectListItem { Value = "2", Text = "Uncommon" },
+                    new SelectListItem { Value = "3", Text = "Rare" }
+                },
+                
                 Product = new Product()
             };
             if (id == null || id == 0)

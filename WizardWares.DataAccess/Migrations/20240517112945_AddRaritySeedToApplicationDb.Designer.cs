@@ -11,8 +11,8 @@ using WizardWares.DataAccess.Data;
 namespace WizardWares.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240508144001_seedProductTable")]
-    partial class seedProductTable
+    [Migration("20240517112945_AddRaritySeedToApplicationDb")]
+    partial class AddRaritySeedToApplicationDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,11 +88,13 @@ namespace WizardWares.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("PriceMoney")
+                    b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<string>("PriceObject")
-                        .IsRequired()
+                    b.Property<string>("Rarity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TradeItem")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -109,8 +111,9 @@ namespace WizardWares.DataAccess.Migrations
                             Description = "Drink this potion to recover 50 health.",
                             ImageUrl = "",
                             Name = "inferior health potion",
-                            PriceMoney = 15.0,
-                            PriceObject = "A piece of hidden lore"
+                            Price = 15.0,
+                            Rarity = "Inferior",
+                            TradeItem = "A piece of hidden lore"
                         },
                         new
                         {
@@ -119,8 +122,9 @@ namespace WizardWares.DataAccess.Migrations
                             Description = "Drink this potion to recover 50 stamina.",
                             ImageUrl = "",
                             Name = "inferior stamina potion",
-                            PriceMoney = 15.0,
-                            PriceObject = "A piece of hidden lore"
+                            Price = 15.0,
+                            Rarity = "Inferior",
+                            TradeItem = "A piece of hidden lore"
                         },
                         new
                         {
@@ -129,8 +133,9 @@ namespace WizardWares.DataAccess.Migrations
                             Description = "Drink this potion to recover 50 mana.",
                             ImageUrl = "",
                             Name = "inferior mana potion",
-                            PriceMoney = 15.0,
-                            PriceObject = "A piece of hidden lore"
+                            Price = 15.0,
+                            Rarity = "Inferior",
+                            TradeItem = "A piece of hidden lore"
                         });
                 });
 

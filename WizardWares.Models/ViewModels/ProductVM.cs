@@ -15,5 +15,6 @@ namespace WizardWares.Models.ViewModels
         public Product Product { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> CategoryList { get; set; }
+        public IEnumerable<SelectListItem> RarityList { get; set; }
     }
 }

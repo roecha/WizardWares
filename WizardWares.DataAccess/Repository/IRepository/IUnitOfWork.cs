@@ -11,6 +11,7 @@ namespace WizardWares.DataAccess.Repositiory.IRepository
     {
         ICategoryRepository Category { get; }
         IProductRepository Product { get; }
+        IRarityRepository Rarity { get; }
 
         void Save();
     }

@@ -27,14 +27,20 @@
                             <span asp-validation-for="Product.Description" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.PriceMoney" type="text" class="form-control border-0" />
-                            <label asp-for="Product.PriceMoney" class="ms-2"></label>
-                            <span asp-validation-for="Product.PriceMoney" class="text-danger"></span>
+                            <input asp-for="Product.Price" type="text" class="form-control border-0" />
+                            <label asp-for="Product.Price" class="ms-2"></label>
+                            <span asp-validation-for="Product.Price" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.PriceObject" type="text" class="form-control border-0" />
-                            <label asp-for="Product.PriceObject" class="ms-2"></label>
-                            <span asp-validation-for="Product.PriceObject" class="text-danger"></span>
+                            <input asp-for="Product.TradeItem" type="text" class="form-control border-0" />
+                            <label asp-for="Product.TradeItem" class="ms-2"></label>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="@Model.RarityList" asp-items="@Model.RarityList" class="form-select border-0">
+                                <option disabled selected>--Select Rarity--</option>
+                            </select>
+                            <label asp-for="Product.Rarity" class="ms-2"></label>
+                            <span asp-validation-for="Product.Rarity" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0">

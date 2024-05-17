@@ -17,8 +17,9 @@ namespace WizardWares.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public double PriceMoney { get; set; }
-        public string PriceObject { get; set; }
+        public double Price { get; set; }
+        public string? TradeItem { get; set; }
+        public string? Rarity { get; set; }
 
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]

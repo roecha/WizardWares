@@ -85,11 +85,13 @@ namespace WizardWares.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("PriceMoney")
+                    b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<string>("PriceObject")
-                        .IsRequired()
+                    b.Property<string>("Rarity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TradeItem")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -106,8 +108,9 @@ namespace WizardWares.DataAccess.Migrations
                             Description = "Drink this potion to recover 50 health.",
                             ImageUrl = "",
                             Name = "inferior health potion",
-                            PriceMoney = 15.0,
-                            PriceObject = "A piece of hidden lore"
+                            Price = 15.0,
+                            Rarity = "Inferior",
+                            TradeItem = "A piece of hidden lore"
                         },
                         new
                         {
@@ -116,8 +119,9 @@ namespace WizardWares.DataAccess.Migrations
                             Description = "Drink this potion to recover 50 stamina.",
                             ImageUrl = "",
                             Name = "inferior stamina potion",
-                            PriceMoney = 15.0,
-                            PriceObject = "A piece of hidden lore"
+                            Price = 15.0,
+                            Rarity = "Inferior",
+                            TradeItem = "A piece of hidden lore"
                         },
                         new
                         {
@@ -126,8 +130,45 @@ namespace WizardWares.DataAccess.Migrations
                             Description = "Drink this potion to recover 50 mana.",
                             ImageUrl = "",
                             Name = "inferior mana potion",
-                            PriceMoney = 15.0,
-                            PriceObject = "A piece of hidden lore"
+                            Price = 15.0,
+                            Rarity = "Inferior",
+                            TradeItem = "A piece of hidden lore"
+                        });
+                });
+
+            modelBuilder.Entity("WizardWares.Models.Rarity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ColorCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ValueOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rarities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ColorCode = "1111111",
+                            Name = "Common",
+                            ValueOrder = 1
                         });
                 });
 
