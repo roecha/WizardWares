@@ -40,11 +40,11 @@ namespace WizardWares.Areas.Admin.Controllers
                     Value = u.Id.ToString()
                 }),
 
-                RarityList = new List<SelectListItem> {
-                    new SelectListItem { Value = "1", Text = "Common" },
-                    new SelectListItem { Value = "2", Text = "Uncommon" },
-                    new SelectListItem { Value = "3", Text = "Rare" }
-                },
+                RarityList = _unitOfWork.Rarity.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
                 
                 Product = new Product()
             };

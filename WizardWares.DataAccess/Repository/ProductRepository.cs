@@ -29,7 +29,7 @@ namespace WizardWares.DataAccess.Repository
                 objFromDb.Description = obj.Description;
                 objFromDb.Price = obj.Price;
                 objFromDb.TradeItem = obj.TradeItem;
-                objFromDb.Rarity = obj.Rarity;
+                objFromDb.RarityId = obj.RarityId;
                 objFromDb.CategoryId = obj.CategoryId;
 
                 if (obj.ImageUrl != null)

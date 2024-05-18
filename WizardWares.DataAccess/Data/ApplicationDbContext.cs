@@ -30,7 +30,7 @@ namespace WizardWares.DataAccess.Data
                     Name = "inferior health potion",
                     Description = "Drink this potion to recover 50 health.",
                     Price = 15,
-                    Rarity = "Inferior",
+                    RarityId = 1,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
@@ -41,7 +41,7 @@ namespace WizardWares.DataAccess.Data
                     Name = "inferior stamina potion",
                     Description = "Drink this potion to recover 50 stamina.",
                     Price = 15,
-                    Rarity = "Inferior",
+                    RarityId = 1,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
@@ -52,7 +52,7 @@ namespace WizardWares.DataAccess.Data
                     Name = "inferior mana potion",
                     Description = "Drink this potion to recover 50 mana.",
                     Price = 15,
-                    Rarity = "Inferior",
+                    RarityId = 1,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
@@ -67,7 +67,7 @@ namespace WizardWares.DataAccess.Data
                     ColorCode = "1111111",
                     ValueOrder = 1
                 }
-            ); ;
+            );
         }
     }
 }
