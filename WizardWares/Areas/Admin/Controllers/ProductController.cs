@@ -25,11 +25,10 @@ namespace WizardWares.Areas.Admin.Controllers
         {
             // Use entitiy framework core to retrieve the list
             // The ability to include category in GetAll is implemented in repository file
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category,Rarity").ToList();
             return View(objProductList);
         }
 
-        // Example of a ViewBag
         public IActionResult Upsert(int? id)
         {
             ProductVM productVM = new()
@@ -113,7 +112,13 @@ namespace WizardWares.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
-                
+
+                productVM.RarityList = _unitOfWork.Rarity.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+
                 return View(productVM);
             }
         }
@@ -139,7 +144,7 @@ namespace WizardWares.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity").ToList();
             return Json(new { data = objProductList });
 
         }
