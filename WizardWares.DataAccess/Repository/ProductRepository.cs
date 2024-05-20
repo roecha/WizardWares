@@ -29,6 +29,7 @@ namespace WizardWares.DataAccess.Repository
                 objFromDb.Description = obj.Description;
                 objFromDb.Price = obj.Price;
                 objFromDb.TradeItem = obj.TradeItem;
+                objFromDb.InStock = obj.InStock;
                 objFromDb.RarityId = obj.RarityId;
                 objFromDb.CategoryId = obj.CategoryId;
 

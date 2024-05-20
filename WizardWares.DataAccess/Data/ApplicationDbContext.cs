@@ -17,9 +17,9 @@ namespace WizardWares.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Potions", DisplayOrder = 1 },
-                new Category { Id = 2, Name = "Spell Books", DisplayOrder = 2 },
-                new Category { Id = 3, Name = "Wands", DisplayOrder = 3 }
+                new Category { Id = 1, Name = "Potions", DisplayOrder = 1, ImageUrl = "" },
+                new Category { Id = 2, Name = "Spell Books", DisplayOrder = 2, ImageUrl = "" },
+                new Category { Id = 3, Name = "Wands", DisplayOrder = 3, ImageUrl = "" }
 
             );
 
@@ -31,6 +31,7 @@ namespace WizardWares.DataAccess.Data
                     Description = "Drink this potion to recover 50 health.",
                     Price = 15,
                     RarityId = 1,
+                    InStock = 1000,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
@@ -42,6 +43,7 @@ namespace WizardWares.DataAccess.Data
                     Description = "Drink this potion to recover 50 stamina.",
                     Price = 15,
                     RarityId = 1,
+                    InStock = 1000,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
@@ -53,6 +55,7 @@ namespace WizardWares.DataAccess.Data
                     Description = "Drink this potion to recover 50 mana.",
                     Price = 15,
                     RarityId = 1,
+                    InStock = 1000,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""

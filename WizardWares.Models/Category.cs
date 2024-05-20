@@ -19,5 +19,7 @@ namespace WizardWares.Models
         [DisplayName("Display Order")]
         [Range(1, 100, ErrorMessage = "The value thou seeketh must dwell betwixt the realms of one and one hundred, for therein lies balance and harmony")]
         public int DisplayOrder { get; set; }
+        public string? ImageUrl { get; set; }
+
     }
 }
