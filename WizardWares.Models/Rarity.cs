@@ -15,7 +15,7 @@ namespace WizardWares.Models
         public string? Name { get; set; }
         public string? Description { get; set; }
         [Required]
-        public string? ColorCode { get; set; }
+        public string ColorCode { get; set; }
         [Required]
         public int ValueOrder { get; set; }
     }

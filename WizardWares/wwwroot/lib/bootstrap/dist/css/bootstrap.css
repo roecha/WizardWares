@@ -4827,7 +4827,7 @@ textarea.form-control-lg {
     --bs-card-cap-color: #E5E4E2; /* Moonlight White */
     --bs-card-height: auto;
     --bs-card-color: #E5E4E2; /* Moonlight White */
-    --bs-card-bg: #0D1B2A; /* Dark Navy */
+    --bs-card-bg: var(--bs-primary); /* Dark Navy */
     --bs-card-img-overlay-padding: 1rem;
     --bs-card-group-margin: 0.75rem;
     position: relative;
