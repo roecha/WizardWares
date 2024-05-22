@@ -777,36 +777,6 @@ progress {
     margin-left: auto;
 }
 
-@media (min-width: 576px) {
-    .container-sm, .container {
-        max-width: 540px;
-    }
-}
-
-@media (min-width: 768px) {
-    .container-md, .container-sm, .container {
-        max-width: 720px;
-    }
-}
-
-@media (min-width: 992px) {
-    .container-lg, .container-md, .container-sm, .container {
-        max-width: 960px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .container-xl, .container-lg, .container-md, .container-sm, .container {
-        max-width: 1140px;
-    }
-}
-
-@media (min-width: 1400px) {
-    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-        max-width: 1320px;
-    }
-}
-
 :root {
     --bs-breakpoint-xs: 0;
     --bs-breakpoint-sm: 576px;
@@ -4816,7 +4786,7 @@ textarea.form-control-lg {
     --bs-card-title-spacer-y: 0.5rem;
     --bs-card-title-color: #FFD700; /* Gold for titles */
     --bs-card-subtitle-color: #C0C0C0; /* Silver for subtitles */
-    --bs-card-border-width: var(--bs-border-width);
+    --bs-card-border-width: 0;
     --bs-card-border-color: var(--bs-primary); /* Deep Purple */
     --bs-card-border-radius: var(--bs-border-radius);
     --bs-card-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);

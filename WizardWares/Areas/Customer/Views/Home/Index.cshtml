@@ -1,8 +1,31 @@
 ﻿@model IEnumerable<Product>
 
-<div class="container-fluid pb-3">
-    <div class="row no-gutters">
-        <div class="col-2 bg-danger">
+<style>
+    .container {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .row {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1 * var(--bs-gutter-y));
+        margin-right: calc(-0.5 * var(--bs-gutter-x));
+        margin-left: calc(-0.5 * var(--bs-gutter-x));
+    }
+
+</style>
+
+<div class="container">
+    <div class="row g-5">
+        <div class="col-2 bg-black">
             <!-- This column can be used for additional content or left empty -->
         </div>
         <div class="col-8">
@@ -10,44 +33,23 @@
                 @foreach (var product in Model)
                 {
                     <div class="col-lg-3 col-sm-6">
-                        <div class="row">
-                            <div class="row p-2">
-                                <div class="col-12 p-1">
-                                    <div class="card p-3 rounded"
-                                         style="border: 3px solid @product.Rarity.ColorCode; box-shadow: 0 0 1rem @product.Rarity.ColorCode">
-                                        <img src="@product.ImageUrl" class="card-img-top rounded" />
-                                        <div class="card-body pb-0">
-                                            <div class="pl-1">
-                                                <p class="card-title h5 opacity-75 text-uppercase text-center" style="font-family: IM Fell English, serif;">@product.Name</p>
-                                            </div>
-                                            <div class="pl-1">
-                                                <p class="text-opacity-75 text-center mb-0">
-                                                    <span class="">
-                                                        <i class="bi bi-coin">
-                                                            @product.Price.ToString()
-                                                        </i>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <div class="pl-1">
-                                                <p class="text-opacity-75 text-center mb-0">
-                                                    -or-
-                                                </p>
-                                            </div>
-                                            <div class="pl-1">
-                                                <p class="text-opacity-75 text-center">
-                                                    <span>
-                                                        @product.TradeItem
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-primary bg-gradient border-1 form-control">
-                                                Details
-                                            </a>
-                                        </div>
-                                    </div>
+                        <div class="card w-100 mb-3">
+                            <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top rounded" style="border: 3px solid @product.Rarity.ColorCode; box-shadow: 0 0 1rem @product.Rarity.ColorCode" />
+                            <div class="card-body">
+                                <p class="card-title h6 text-uppercase text-center" style="font-family: IM Fell English, serif;">@product.Name</p>
+                                <p class="text-center mb-0">
+                                    <span class="h5 text-success">
+                                        <i class="bi bi-coin"></i> @product.Price.ToString()
+                                    </span>
+                                </p>
+                                <p class="text-center mb-0">-or-</p>
+                                <p class="text-center">
+                                    <span>@product.TradeItem</span>
+                                </p>
+                                <div class="d-grid gap-2">
+                                    <a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-outline-primary">
+                                        Details
+                                    </a>
                                 </div>
                             </div>
                         </div>
