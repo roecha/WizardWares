@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace WizardWares.DataAccess.Repositiory
         public ICategoryRepository Category { get; private set; }
         public IProductRepository Product { get; private set; }
         public IRarityRepository Rarity { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
+
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -23,6 +26,7 @@ namespace WizardWares.DataAccess.Repositiory
             Category = new CategoryRepository(_db);
             Product = new ProductRepository(_db);
             Rarity = new RarityRepository(_db);
+            ShoppingCart = new ShoppingCartRepository(_db);
         }
 
         public void Save()
