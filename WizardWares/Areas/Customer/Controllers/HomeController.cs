@@ -51,11 +51,12 @@ namespace TomesNScrolls.Areas.Customer.Controllers
             if (cartFromDb != null)
             {
                 // Cart is already in the DB
-                cartFromDb.Count += shoppingCart.Count;
+                cartFromDb.Count += shoppingCart.Count + 1;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
             }
             else
             {
+                shoppingCart.Count += 1;
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
             }
 

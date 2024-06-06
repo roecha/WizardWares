@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WizardWares.DataAccess.Repositiory.IRepository;
 using WizardWares.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace WizardWares.DataAccess.Repositiory
 {
@@ -25,7 +26,7 @@ namespace WizardWares.DataAccess.Repositiory
         {
             dbSet.Add(entity);
         }
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 
