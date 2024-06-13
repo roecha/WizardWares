@@ -39,7 +39,6 @@ namespace WizardWares.DataAccess.Data
                     Description = "Drink this potion to recover 50 health.",
                     Price = 15,
                     RarityId = 1,
-                    InStock = 1000,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
@@ -51,7 +50,6 @@ namespace WizardWares.DataAccess.Data
                     Description = "Drink this potion to recover 50 stamina.",
                     Price = 15,
                     RarityId = 1,
-                    InStock = 1000,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""
@@ -63,7 +61,6 @@ namespace WizardWares.DataAccess.Data
                     Description = "Drink this potion to recover 50 mana.",
                     Price = 15,
                     RarityId = 1,
-                    InStock = 1000,
                     TradeItem = "A piece of hidden lore",
                     CategoryId = 1,
                     ImageUrl = ""

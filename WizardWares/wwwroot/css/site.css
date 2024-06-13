@@ -20,7 +20,7 @@ html {
 body {
     margin-bottom: 60px;
     font-family: serif;
-    background-image: url('/images/723a2a67-e45d-4597-943a-9399aed5b4a3.webp'); /* Adjust the path according to your folder structure */
+    background-image: url('/images/crystalball.webp'); /* Adjust the path according to your folder structure */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -28,3 +28,6 @@ body {
     color: #E5E4E2; /* Moonlight White for text to ensure readability on a dark background */
 }
 
+.medieval-sharp {
+    font-family: 'MedievalSharp', cursive;
+}

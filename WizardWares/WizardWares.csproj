@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Areas\Customer\Views\Home\crystalball.webp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Areas\Customer\Views\Home\crystalball.webp" />
+    <Content Include="Areas\Customer\Views\Home\image\crystalball.webp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
@@ -20,10 +29,6 @@
     <ProjectReference Include="..\WizardWares.DataAccess\WizardWares.DataAccess.csproj" />
     <ProjectReference Include="..\WizardWares.Models\WizardWares.Models.csproj" />
     <ProjectReference Include="..\WizardWares.Utility\WizardWares.Utility.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
 </Project>

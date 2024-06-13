@@ -19,7 +19,6 @@ namespace WizardWares.Models
 
         public double Price { get; set; }
         public string? TradeItem { get; set; }
-        public int InStock { get; set; }
         public int? RarityId { get; set; }
         [ForeignKey("RarityId")]
         [ValidateNever]
