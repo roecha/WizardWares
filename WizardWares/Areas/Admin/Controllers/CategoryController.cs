@@ -21,7 +21,7 @@ namespace WizardWares.Areas.Admin.Controllers
             return View(objCategoryList);
         }
 
-        public IActionResult Create(Category obj)
+        public IActionResult Upsert(Category obj)
         {
             // Adding some tests to category name restrictions
             if (obj.Name == obj.DisplayOrder.ToString())
@@ -44,7 +44,7 @@ namespace WizardWares.Areas.Admin.Controllers
             }
             return View(obj);
         }
- 
+
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
