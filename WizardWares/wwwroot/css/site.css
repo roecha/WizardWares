@@ -20,7 +20,7 @@ html {
 body {
     margin-bottom: 60px;
     font-family: serif;
-    background-image: url('/images/crystalball.webp'); /* Adjust the path according to your folder structure */
+    background-image: url('/images/background2.webp'); /* Adjust the path according to your folder structure */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
