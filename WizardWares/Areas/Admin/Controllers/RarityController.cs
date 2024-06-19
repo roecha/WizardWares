@@ -20,87 +20,78 @@ namespace WizardWares.Areas.Admin.Controllers
             return View(rarityList);
         }
 
-        public IActionResult Create(Rarity obj)
+        /* This class either updates or inserts objects in the rarity database */
+        public IActionResult Upsert(int? id)
         {
-            if (obj.Name == obj.ValueOrder.ToString())
-            {
-                ModelState.AddModelError("name", "The ValueOrder cannot exactly match the Name");
-            }
-            if (obj.Name == "test")
-            {
-                ModelState.AddModelError("", "Test is an invalid value");
-            }
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Rarity.Add(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Rarity hath been conjured forth with success!";
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
+            Rarity rarityObj = new Rarity();
 
-        public IActionResult Edit(int? id)
-        {
             if (id == null || id == 0)
             {
-                return NotFound();
+                // If there is no ID, then we need to create an object
+                return View(rarityObj);
             }
-            Rarity? rarityFromDb = _unitOfWork.Rarity.Get(u => u.Id == id);
-
-            if (rarityFromDb == null)
+            else
             {
-                return NotFound();
+                // If there is an ID then we need to edit the object
+                rarityObj = _unitOfWork.Rarity.Get(u => u.Id == id);
+                return View(rarityObj);
             }
-            return View(rarityFromDb);
-        }
 
+
+        }
 
         [HttpPost]
-        public IActionResult Edit(Rarity obj)
+        public IActionResult Upsert(Rarity rarity)
         {
-
             if (ModelState.IsValid)
             {
-                _unitOfWork.Rarity.Update(obj);
+
+                if (rarity.Id == 0)
+                {
+                    // Add new rarity to DB
+                    _unitOfWork.Rarity.Add(rarity);
+                }
+                else
+                {
+                    // Add updated rarity to DB
+                    _unitOfWork.Rarity.Update(rarity);
+                }
+
                 _unitOfWork.Save();
-                TempData["success"] = "Thy rarity hath been amended";
+                TempData["success"] = "Rarity created successfully";
                 return RedirectToAction("Index");
             }
-            return View();
-
+            else
+            {
+                return View(rarity);
+            }
         }
 
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Rarity> objRarityList = _unitOfWork.Rarity.GetAll().ToList();
+            return Json(new { data = objRarityList });
+        }
+
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var rarityToBeDeleted = _unitOfWork.Rarity.Get(u => u.Id == id);
+            if (rarityToBeDeleted == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
-            Rarity? rarityFromDb = _unitOfWork.Rarity.Get(u => u.Id == id);
-
-            if (rarityFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(rarityFromDb);
-        }
-
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
-        {
-            Rarity? obj = _unitOfWork.Rarity.Get(u => u.Id == id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            _unitOfWork.Rarity.Remove(obj);
+            _unitOfWork.Rarity.Remove(rarityToBeDeleted);
             _unitOfWork.Save();
-            TempData["success"] = "Gone from the realms of our store, thy rarity hath vanished.";
-            return RedirectToAction("Index");
+
+            return Json(new { success = true, message = "Delete Successful" });
         }
+
+        #endregion
 
     }
 }

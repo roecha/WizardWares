@@ -1,33 +1,35 @@
 ﻿@model List<Rarity>
 <div class="container">
 
-    <div class="card shadow border-0 mt-4">
+    <div class="card shadow border-2 mt-4">
         <div class="card-header ml-0 py-3">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="test-white py-2">Rarity List</h2>
+                    <h2 class="text-white py-2">Rarity List</h2>
                 </div>
-
             </div>
 
         </div>
-
-        <div class="card-body p4">
+        <div class="card-body p-4">
             <div class="row pt-4 pb-3">
                 <div class="col-6">
                 </div>
                 <div class="col-6 text-end">
-                    <a asp-controller="Rarity" asp-action="Create" class="btn btn-dark">
+                    <a asp-controller="Rarity" asp-action="Upsert" class="btn btn-dark">
                         <i class="bi bi-plus"></i> Create Rarity
                     </a>
                 </div>
             </div>
+            <div class="table-responsive col-12">
+                <table id="tblData" class="table table-bordered table-striped w-100">
 
-            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th>A
+                            Name
+                        </th>
                         <th>
-                            Rarity Name
+                            Description
                         </th>
                         <th>
                             Color Code
@@ -38,26 +40,12 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var obj in Model.OrderBy(u => u.ValueOrder))
-                    {
-                        <tr>
-                            <td>@obj.Name</td>
-                            <td>@obj.ColorCode</td>
-                            <td>@obj.ValueOrder</td>
-                            <td>
-                                <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="Rarity" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-dark mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
-                                    <a asp-controller="Rarity" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2"><i class="bi bi-trash"></i>Delete</a>
-
-                                </div>
-                            </td>
-                        </tr>
-                    }
-
-                </tbody>
             </table>
+            </div>
         </div>
     </div>
-
 </div>
+
+@section Scripts {
+    <script src="~/js/rarity.js"></script>
+}

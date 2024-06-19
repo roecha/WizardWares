@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using WizardWares.DataAccess.Repositiory;
 using WizardWares.DataAccess.Repositiory.IRepository;
 using WizardWares.Models;
+using WizardWares.Models.ViewModels;
 
 namespace WizardWares.Areas.Admin.Controllers
 {
@@ -21,91 +23,76 @@ namespace WizardWares.Areas.Admin.Controllers
             return View(objCategoryList);
         }
 
-        public IActionResult Upsert(Category obj)
+        /* This class either updates or inserts objects in the category database */
+        public IActionResult Upsert(int? id)
         {
-            // Adding some tests to category name restrictions
-            if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name");
-            }
-            if (obj.Name == "test")
-            {
-                ModelState.AddModelError("", "Test is an invalid value");
-            }
-            if (ModelState.IsValid)
-            {
-                // Add category object to database
-                _unitOfWork.Category.Add(obj);
-                _unitOfWork.Save();
-                // Toastr notification
-                TempData["success"] = "Category hath been conjured forth with success!";
-                // Return to index
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
+            Category categoryObj = new Category();
 
-        public IActionResult Edit(int? id)
-        {
             if (id == null || id == 0)
             {
-                return NotFound();
+                // If there is no ID, then we need to create an object
+                return View(categoryObj);
             }
-            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
-
-            if (categoryFromDb == null)
+            else
             {
-                return NotFound();
+                // If there is an ID then we need to edit the object
+                categoryObj = _unitOfWork.Category.Get(u => u.Id == id);
+                return View(categoryObj);
             }
-            return View(categoryFromDb);
+
+
         }
 
-
-        [HttpPost]
-        public IActionResult Edit(Category obj)
+          [HttpPost]
+        public IActionResult Upsert(Category category)
         {
-
             if (ModelState.IsValid)
             {
-                _unitOfWork.Category.Update(obj);
+
+                if (category.Id == 0)
+                {
+                    _unitOfWork.Category.Add(category);
+                }
+                else
+                {
+                    _unitOfWork.Category.Update(category);
+                }
+
                 _unitOfWork.Save();
-                TempData["success"] = "Thy category hath been amended";
+                TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
-            return View();
-
+            else
+            {
+                return View(category);
+            }
         }
 
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
+            return Json(new { data = objCategoryList });
+        }
+
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var categoryToBeDeleted = _unitOfWork.Category.Get(u => u.Id == id);
+            if (categoryToBeDeleted == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
-            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
-
-            if (categoryFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(categoryFromDb);
-        }
-
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
-        {
-            Category? obj = _unitOfWork.Category.Get(u => u.Id == id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Category.Remove(categoryToBeDeleted);
             _unitOfWork.Save();
-            TempData["success"] = "Gone from the realms of our store, thy category hath vanished.";
-            return RedirectToAction("Index");
+
+            return Json(new { success = true, message = "Delete Successful" });
         }
+
+#endregion
 
     }
 }
