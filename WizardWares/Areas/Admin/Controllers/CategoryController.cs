@@ -11,17 +11,19 @@ namespace WizardWares.Areas.Admin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         public CategoryController(IUnitOfWork unitOfWork)
         {
+            // initialize a unit of work
             _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            // Use entitiy framework core to retrieve the list
+            // Entitiy framework uses unitOfWork to retrieve the list of category objects
             List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
 
         public IActionResult Create(Category obj)
         {
+            // Adding some tests to category name restrictions
             if (obj.Name == obj.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name");
@@ -32,14 +34,17 @@ namespace WizardWares.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
+                // Add category object to database
                 _unitOfWork.Category.Add(obj);
                 _unitOfWork.Save();
+                // Toastr notification
                 TempData["success"] = "Category hath been conjured forth with success!";
+                // Return to index
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
-
+ 
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)

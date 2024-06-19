@@ -290,9 +290,6 @@ namespace WizardWares.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InStock")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -321,7 +318,6 @@ namespace WizardWares.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Drink this potion to recover 50 health.",
                             ImageUrl = "",
-                            InStock = 1000,
                             Name = "inferior health potion",
                             Price = 15.0,
                             RarityId = 1,
@@ -333,7 +329,6 @@ namespace WizardWares.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Drink this potion to recover 50 stamina.",
                             ImageUrl = "",
-                            InStock = 1000,
                             Name = "inferior stamina potion",
                             Price = 15.0,
                             RarityId = 1,
@@ -345,7 +340,6 @@ namespace WizardWares.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Drink this potion to recover 50 mana.",
                             ImageUrl = "",
-                            InStock = 1000,
                             Name = "inferior mana potion",
                             Price = 15.0,
                             RarityId = 1,

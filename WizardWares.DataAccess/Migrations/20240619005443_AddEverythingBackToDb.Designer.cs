@@ -12,8 +12,8 @@ using WizardWares.DataAccess.Data;
 namespace WizardWares.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240605184759_AddShoppingCartToDb")]
-    partial class AddShoppingCartToDb
+    [Migration("20240619005443_AddEverythingBackToDb")]
+    partial class AddEverythingBackToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -227,31 +227,6 @@ namespace WizardWares.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Wizard.Models.ShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ShoppingCarts");
-                });
-
             modelBuilder.Entity("WizardWares.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -318,9 +293,6 @@ namespace WizardWares.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InStock")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -349,7 +321,6 @@ namespace WizardWares.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Drink this potion to recover 50 health.",
                             ImageUrl = "",
-                            InStock = 1000,
                             Name = "inferior health potion",
                             Price = 15.0,
                             RarityId = 1,
@@ -361,7 +332,6 @@ namespace WizardWares.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Drink this potion to recover 50 stamina.",
                             ImageUrl = "",
-                            InStock = 1000,
                             Name = "inferior stamina potion",
                             Price = 15.0,
                             RarityId = 1,
@@ -373,7 +343,6 @@ namespace WizardWares.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Drink this potion to recover 50 mana.",
                             ImageUrl = "",
-                            InStock = 1000,
                             Name = "inferior mana potion",
                             Price = 15.0,
                             RarityId = 1,
@@ -415,6 +384,31 @@ namespace WizardWares.DataAccess.Migrations
                             Name = "Common",
                             ValueOrder = 1
                         });
+                });
+
+            modelBuilder.Entity("WizardWares.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -468,17 +462,6 @@ namespace WizardWares.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizard.Models.ShoppingCart", b =>
-                {
-                    b.HasOne("WizardWares.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("WizardWares.Models.Product", b =>
                 {
                     b.HasOne("WizardWares.Models.Category", "Category")
@@ -494,6 +477,17 @@ namespace WizardWares.DataAccess.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Rarity");
+                });
+
+            modelBuilder.Entity("WizardWares.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("WizardWares.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

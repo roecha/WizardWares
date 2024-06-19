@@ -2,69 +2,60 @@
 
 <form method="post">
     <input hidden asp-for="ProductId" />
-    <div class="card shadow border-0 mt-4 mb-4">
-        <div class="card-body">
-            <div class="py-3">
-                <div class="row">
-                    <div class="col-6 col-md-2 offset-lg-1 pb-1">
-                        <a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
-                            <small>Back to home</small>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
-                        <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" class="card-img-top rounded" style="border: 3px solid @Model.Product.Rarity.ColorCode; box-shadow: 0 0 1rem @Model.Product.Rarity.ColorCode" />
-                        <div class="fs-5 medieval-sharp">@Model.Product.Rarity.Name</div>
-
-                    </div>
-                   
-
-                    <div class="col-12 col-lg-7 offset-lg-1">
-                         
-                        <div class="row">
-                            <h3 class="text-uppercase medieval-sharp">@Model.Product.Name</h3>
+    <div class="container mt-4 mb-4" style="max-width: 1000px;">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <div class="py-3">
+                    <div class="row">
+                        <div class="col-6 col-md-2 pb-1">
+                            <a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                                <small>Back to home</small>
+                            </a>
                         </div>
-                        <div class="row">
-                            <p class="text-secondary lh-sm">@Html.Raw(Model.Product.Description)</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-4 text-center mb-3">
+                            <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" class="card-img-top rounded" style="border: 3px solid @Model.Product.Rarity.ColorCode; box-shadow: 0 0 1rem @Model.Product.Rarity.ColorCode" />
+                            <div class="fs-5 medieval-sharp">@Model.Product.Rarity.Name</div>
                         </div>
-                            
-
-
-                        <div class="row text-center ps-2">
-                            <div class="p-1 col-3 col-lg-2 border-bottom">
-                                <div class="fw-semibold">Price</div>
+                        <div class="col-12 col-lg-7">
+                            <div class="row">
+                                <h3 class="text-uppercase text-center medieval-sharp">@Model.Product.Name</h3>
                             </div>
-                            <div class="p-1 col-3 col-lg-2 border-bottom">
-                                <div class="fw-semibold">
-                                    <span class="h5 text-warning">
-                                        <i class="bi bi-coin"></i> @Model.Product.Price.ToString()
-                                    </span>
+                            <div class="row">
+                                <p class="text-secondary text-center lh-sm">@Html.Raw(Model.Product.Description)</p>
+                            </div>
+                            <div class="row text-center justify-content-center">
+                                <div class="p-1 col-6 col-lg-3 border-bottom">
+                                    <div class="fw-semibold">Price</div>
+                                </div>
+                                <div class="p-1 col-6 col-lg-3 border-bottom">
+                                    <div class="fw-semibold">
+                                        Alt. Price
+                                    </div>
                                 </div>
                             </div>
-                            
-                        </div>
-                        <div class="row text-center ps-2">
-                            <div class="p-1 col-3 col-lg-2 fw-bold">
-                                <div>Or</div>
+                            <div class="row text-center justify-content-center mb-4">
+                                <div class="p-1 col-6 col-lg-3 fw-bold">
+                                    <div>
+                                        <span class="h5 text-warning">
+                                            <i class="bi bi-coin"></i> @Model.Product.Price.ToString()
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-1 col-6 col-lg-3 fw-bold">
+                                    <div>@Model.Product.TradeItem</div>
+                                </div>
                             </div>
-                            <div class="p-1 col-3 col-lg-2 fw-bold">
-                                <div>@Model.Product.TradeItem</div>
-                            </div>
-                           
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-12 col-md-6 pb-1">
-                                <button type="submit"
-                                        class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
-                                    Add to Cart
-                                </button>
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-6 pb-1">
+                                    <button type="submit" class="btn btn-primary bg-gradient w-100 py-2 text-uppercase fw-semibold">
+                                        Add to Cart
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
