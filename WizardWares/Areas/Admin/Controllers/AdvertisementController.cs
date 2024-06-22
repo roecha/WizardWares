@@ -31,7 +31,7 @@ namespace WizardWares.Areas.Admin.Controllers
         public IActionResult Upsert(int? id)
         {
             // This class handles both updating and creating (inserting) advertisement objects
-            AdvertisementVM productVM = new()
+            AdvertisementVM advertisementVM = new()
             {
                 ProductList = _unitOfWork.Product.GetAll().Select(u => new SelectListItem
                 {
@@ -45,13 +45,13 @@ namespace WizardWares.Areas.Admin.Controllers
             if (id == null || id == 0)
             {
                 // The object does not exist and needs to be created 
-                return View(productVM);
+                return View(advertisementVM);
             }
             else
             {
                 // The object needs to be edited
-                productVM.Advertisement = _unitOfWork.Advertisement.Get(u => u.Id == id);
-                return View(productVM);
+                advertisementVM.Advertisement = _unitOfWork.Advertisement.Get(u => u.Id == id);
+                return View(advertisementVM);
             }
         }
 
@@ -88,7 +88,7 @@ namespace WizardWares.Areas.Admin.Controllers
                     }
 
                     // Add image url to Advertisement Object
-                    advertisementVM.Advertisement.ImageUrl = @"\images\product\" + fileName;
+                    advertisementVM.Advertisement.ImageUrl = @"\images\advertisement\" + fileName;
                 }
 
                 if (advertisementVM.Advertisement.Id == 0)
@@ -131,7 +131,7 @@ namespace WizardWares.Areas.Admin.Controllers
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            var adToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
+            var adToBeDeleted = _unitOfWork.Advertisement.Get(u => u.Id == id);
             if (adToBeDeleted == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
@@ -147,7 +147,7 @@ namespace WizardWares.Areas.Admin.Controllers
                 System.IO.File.Delete(oldImagePath);
             }
 
-            _unitOfWork.Product.Remove(adToBeDeleted);
+            _unitOfWork.Advertisement.Remove(adToBeDeleted);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Delete Successful" });

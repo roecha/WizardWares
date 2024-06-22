@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Areas\Customer\Views\Home\crystalball.webp" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Areas\Customer\Views\Home\crystalball.webp" />
     <Content Include="Areas\Customer\Views\Home\image\crystalball.webp" />
   </ItemGroup>
 
@@ -37,6 +32,10 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Areas\Admin\Views\Rarity\Upsert.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\js\advertisement.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

@@ -5,6 +5,8 @@ using System.Security.Claims;
 using WizardWares.Models;
 using WizardWares.DataAccess.Repositiory.IRepository;
 using WizardWares.Models;
+using WizardWares.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TomesNScrolls.Areas.Customer.Controllers
 {
@@ -22,8 +24,14 @@ namespace TomesNScrolls.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity");
-            return View(productList);
+            // Create a view model to access both Products and Advertisements 
+            HomeVM homeVM = new()
+            {
+                ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity"),
+                AdList = _unitOfWork.Advertisement.GetAll()
+            };
+
+            return View(homeVM);
         }
         public IActionResult Details(int productId)
         {

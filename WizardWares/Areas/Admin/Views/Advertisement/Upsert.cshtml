@@ -1,7 +1,7 @@
 ﻿@model AdvertisementVM
 
 <div class="row">
-    <div class="col-3"></div>
+    <div class="col-3"></div> 
     <div class="col-6">
         <div class="card shadow border-0 mt-4">
             <div class="card-header ml-0 py-3">
@@ -21,27 +21,27 @@
                             <div class="p-3">
                                 <div asp-validation-summary="All"></div>
                                 <div class="form-floating py-2 col-12">
-                                    <select asp-for="@Model.Advertisement.ProductId" asp-items="@Model.ProductList" class="form-select border-0">
+                                    <select asp-for="@Model.Advertisement.ProductId" asp-items="@Model.ProductList" class="form-select border border-primary">
                                         <option value="">--Select Product--</option>
                                     </select>
                                     <label asp-for="Advertisement.ProductId" class="ms-2"></label>
-                                </div>hyu
+                                </div>
                                 <div class="form-floating py-2 col-12">
-                                    <input type="file" name="file" class="form-control border-0" shadow />
+                                    <input type="file" name="file" class="form-control border border-primary shadow" />
                                     <label asp-for="Advertisement.ImageUrl" class="ms-2"></label>
                                     <span class="text-danger"></span>
                                 </div>
                                 <div class="form-floating py-2">
-                                    <input asp-for="Advertisement.Sizing" type="text" class="form-control" />
+                                    <input asp-for="Advertisement.Sizing" type="text" class="form-control border border-primary" />
                                     <label asp-for="Advertisement.Sizing" class="ms-2"></label>
                                     <span asp-validation-for="Advertisement.Sizing" class="text-danger"></span>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 col-md-3">
-                                        <button class="btn btn-dark form-control">@(Model.Advertisement.Id != 0 ? "Update" : "Create")</button>
+                                    <div class="col-6">
+                                        <button class="btn btn-primary form-control">@(Model.Advertisement.Id != 0 ? "Update" : "Create")</button>
                                     </div>
-                                    <div class="col-6 col-md-3">
-                                        <a asp-controller="Advertisement" asp-action="Index" class="btn btn-outline-dark form-control">Back to List</a>
+                                    <div class="col-6 ">
+                                        <a asp-controller="Advertisement" asp-action="Index" class="btn btn-dark form-control">Back to List</a>
                                     </div>
                                 </div>
                             </div>
