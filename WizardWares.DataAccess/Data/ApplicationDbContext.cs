@@ -18,6 +18,7 @@ namespace WizardWares.DataAccess.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Rarity> Rarities { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -76,6 +77,8 @@ namespace WizardWares.DataAccess.Data
                     ValueOrder = 1
                 }
             );
+
+            
         }
     }
 }

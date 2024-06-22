@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WizardWares.DataAccess.Data;
-using WizardWares.DataAccess.Repository.IRepository;
+using WizardWares.DataAccess.Repositiory.IRepository;
 using WizardWares.Models;
 
 namespace WizardWares.DataAccess.Repositiory
 {
-    public class AdvertisementRepository : Repository<Advertisement>, IAdvertisementRepository
+    public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         private ApplicationDbContext _db;
-        public AdvertisementRepository(ApplicationDbContext db) : base(db)
+        public CategoryRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-        public void Update(Advertisement obj)
+        public void Update(Category obj)
         {
-            _db.Advertisements.Update(obj);
+            _db.Categories.Update(obj);
         }
 
     }

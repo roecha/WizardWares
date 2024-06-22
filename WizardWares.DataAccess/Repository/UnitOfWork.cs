@@ -18,6 +18,7 @@ namespace WizardWares.DataAccess.Repositiory
         public IProductRepository Product { get; private set; }
         public IRarityRepository Rarity { get; private set; }
         public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IAdvertisementRepository Advertisement { get; private set; }
 
 
         public UnitOfWork(ApplicationDbContext db)
@@ -27,6 +28,7 @@ namespace WizardWares.DataAccess.Repositiory
             Product = new ProductRepository(_db);
             Rarity = new RarityRepository(_db);
             ShoppingCart = new ShoppingCartRepository(_db);
+            Advertisement = new AdvertisementRepository(_db);
         }
 
         public void Save()

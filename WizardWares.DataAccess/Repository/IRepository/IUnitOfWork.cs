@@ -13,6 +13,7 @@ namespace WizardWares.DataAccess.Repositiory.IRepository
         IProductRepository Product { get; }
         IRarityRepository Rarity { get; }
         IShoppingCartRepository ShoppingCart { get; }
+        IAdvertisementRepository Advertisement { get; }
 
         void Save();
     }

@@ -1,0 +1,43 @@
+﻿@model List<Advertisement>
+<div class="container">
+
+    <div class="card shadow border-2 mt-4">
+        <div class="card-header ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="test-white py-2">Advertisements</h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body p4">
+            <div class="row pt-4 pb-3">
+                <div class="col-6">
+                </div>
+                <div class="col-6 text-end">
+                    <a asp-controller="Advertisement" asp-action="Upsert" class="btn btn-dark">
+                        <i class="bi bi-plus"></i> Create Advertisement
+                    </a>
+                </div>
+            </div>
+            <table id="tblData" class="table table-bordered table-striped">
+
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Sizing
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/product.js"></script>
+}

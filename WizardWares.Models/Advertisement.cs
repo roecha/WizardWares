@@ -17,8 +17,9 @@ namespace WizardWares.Models
         public int? ProductId { get; set; }
         [ForeignKey("ProductId")]
         [ValidateNever]
-        public Product product { get; set; }
-        public string ImageUrl { get; set; }
+        public Product Product { get; set; }
+        public string? ImageUrl { get; set; }
+        public string Sizing { get; set; }
 
     }
 }

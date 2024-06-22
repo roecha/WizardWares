@@ -1,0 +1,62 @@
+﻿@model AdvertisementVM
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="card shadow border-0 mt-4">
+            <div class="card-header ml-0 py-3">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="test-white py-2"> @(Model.Advertisement.Id != 0 ? "Update" : "Create") Advertisement</h2>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body p4">
+                <form method="post" class="row" enctype="multipart/form-data">
+                    <input asp-for="Advertisement.Id" hidden />
+                    <input asp-for="Advertisement.ImageUrl" hidden />
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="p-3">
+                                <div asp-validation-summary="All"></div>
+                                <div class="form-floating py-2 col-12">
+                                    <select asp-for="@Model.Advertisement.ProductId" asp-items="@Model.ProductList" class="form-select border-0">
+                                        <option value="">--Select Product--</option>
+                                    </select>
+                                    <label asp-for="Advertisement.ProductId" class="ms-2"></label>
+                                </div>hyu
+                                <div class="form-floating py-2 col-12">
+                                    <input type="file" name="file" class="form-control border-0" shadow />
+                                    <label asp-for="Advertisement.ImageUrl" class="ms-2"></label>
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="form-floating py-2">
+                                    <input asp-for="Advertisement.Sizing" type="text" class="form-control" />
+                                    <label asp-for="Advertisement.Sizing" class="ms-2"></label>
+                                    <span asp-validation-for="Advertisement.Sizing" class="text-danger"></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-md-3">
+                                        <button class="btn btn-dark form-control">@(Model.Advertisement.Id != 0 ? "Update" : "Create")</button>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <a asp-controller="Advertisement" asp-action="Index" class="btn btn-outline-dark form-control">Back to List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <img src="@Model.Advertisement.ImageUrl" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9" />
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
