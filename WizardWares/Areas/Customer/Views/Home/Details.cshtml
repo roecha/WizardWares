@@ -1,7 +1,13 @@
-﻿@model ShoppingCart
+﻿@model HomeVM
+
+<style>
+    .mt-6 {
+        margin-top: 70px;
+    }
+</style>
 
 <form method="post">
-    <input hidden asp-for="ProductId" />
+    <input hidden asp-for="ShoppingCart.ProductId" />
     <div class="container">
         <div class="row">
             <div class="col-2"></div>
@@ -20,15 +26,15 @@
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-12 col-lg-4 text-center mb-3">
-                                        <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" class="card-img-top rounded" style="border: 3px solid @Model.Product.Rarity.ColorCode; box-shadow: 0 0 1rem @Model.Product.Rarity.ColorCode" />
-                                        <div class="fs-5 medieval-sharp">@Model.Product.Rarity.Name</div>
+                                        <img src="@Model.ShoppingCart.Product.ImageUrl" alt="@Model.ShoppingCart.Product.Name" class="card-img-top rounded" style="border: 3px solid @Model.ShoppingCart.Product.Rarity.ColorCode; box-shadow: 0 0 1rem @Model.ShoppingCart.Product.Rarity.ColorCode" />
+                                        <div class="fs-5 medieval-sharp">@Model.ShoppingCart.Product.Rarity.Name</div>
                                     </div>
                                     <div class="col-12 col-lg-7">
                                         <div class="row">
-                                            <h3 class="text-uppercase text-center medieval-sharp">@Model.Product.Name</h3>
+                                            <h3 class="text-uppercase text-center medieval-sharp">@Model.ShoppingCart.Product.Name</h3>
                                         </div>
                                         <div class="row">
-                                            <p class="text-secondary text-center lh-sm">@Html.Raw(Model.Product.Description)</p>
+                                            <p class="text-secondary text-center lh-sm">@Html.Raw(Model.ShoppingCart.Product.Description)</p>
                                         </div>
                                         <div class="row text-center justify-content-center">
                                             <div class="p-1 col-6 col-lg-3 border-bottom">
@@ -44,12 +50,12 @@
                                             <div class="p-1 col-6 col-lg-3 fw-bold">
                                                 <div>
                                                     <span class="h5 text-warning">
-                                                        <i class="bi bi-coin"></i> @Model.Product.Price.ToString()
+                                                        <i class="bi bi-coin"></i> @Model.ShoppingCart.Product.Price.ToString()
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="p-1 col-6 col-lg-3 fw-bold">
-                                                <div>@Model.Product.TradeItem</div>
+                                                <div>@Model.ShoppingCart.Product.TradeItem</div>
                                             </div>
                                         </div>
                                         <div class="row justify-content-center">
@@ -64,10 +70,80 @@
                             </div>
                         </div>
                     </div>
+
+                    <div id="adWideCarousel" class="carousel slide mt-3 mx-auto" data-mdb-ride="carousel" data-mdb-carousel-init style="width: 40%;">
+                        <div class="carousel-inner">
+                            @foreach (var ad in randomizedAds)
+                            {
+                                if (ad.Sizing == "Active Wide")
+                                {
+                                    <div class="carousel-item active">
+                                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                            <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                        </a>
+                                    </div>
+                                }
+                                else if (ad.Sizing == "Wide")
+                                {
+                                    <div class="carousel-item">
+                                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                            <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                        </a>
+                                    </div>
+                                }
+
+                            }
+
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-mdb-target="#adWideCarousel" data-mdb-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-mdb-target="#adWideCarousel" data-mdb-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="col-2"></div>
-            
+            <div class="col-2">
+
+                <div id="adTallCarousel" class="carousel slide mt-6" data-mdb-ride="carousel" data-mdb-carousel-init>
+                    <div class="carousel-inner">
+                        @foreach (var ad in randomizedAds)
+                        {
+                            if (ad.Sizing == "Active Tall")
+                            {
+                                <div class="carousel-item active">
+                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                    </a>
+                                </div>
+                            }
+                            else if (ad.Sizing == "Tall")
+                            {
+                                <div class="carousel-item">
+                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                    </a>
+                                </div>
+                            }
+
+                        }
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-mdb-target="#adTallCarousel" data-mdb-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-mdb-target="#adTallCarousel" data-mdb-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </form>

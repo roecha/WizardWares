@@ -16,5 +16,7 @@ namespace WizardWares.Models.ViewModels
         public IEnumerable<Product> ProductList { get; set; }
         [ValidateNever]
         public IEnumerable<Advertisement> AdList { get; set; }
+
+        public ShoppingCart ShoppingCart { get; set; }
     }
 }

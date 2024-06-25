@@ -57,26 +57,38 @@
                 }
             </div>
         </div>
+
         <div class="col-2">
 
             <div id="adTallCarousel" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
                 <div class="carousel-inner">
-                    @foreach(var ad in Model.AdList)
+                    @foreach (var ad in Model.AdList)
                     {
                         if (ad.Sizing == "Active Tall")
                         {
+
                             <div class="carousel-item active">
-                                <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                    <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                </a>
+
+
                             </div>
-                        } else if (ad.Sizing == "Tall")
+
+                        }
+                        else if (ad.Sizing == "Tall")
                         {
+
                             <div class="carousel-item">
-                                <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                    <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                </a>
+
                             </div>
                         }
 
                     }
-                    
+
                 </div>
                 <button class="carousel-control-prev" type="button" data-mdb-target="#adTallCarousel" data-mdb-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -87,37 +99,41 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            
+
             <div class="mt-5">
                 <div id="adSquareCarousel" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
-                <div class="carousel-inner">
-                    @foreach (var ad in Model.AdList)
-                    {
-                        if (ad.Sizing == "Active Square")
+                    <div class="carousel-inner">
+                        @foreach (var ad in Model.AdList)
                         {
-                            <div class="carousel-item active">
-                                <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                            </div>
-                        }
-                        else if (ad.Sizing == "Square")
-                        {
-                            <div class="carousel-item">
-                                <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                            </div>
+                            if (ad.Sizing == "Active Square")
+                            {
+                                <div class="carousel-item active">
+                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                    </a>
+                                </div>
+                            }
+                            else if (ad.Sizing == "Square")
+                            {
+                                <div class="carousel-item">
+                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                    </a>
+                                </div>
+                            }
+
                         }
 
-                    }
-
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-mdb-target="#adSquareCarousel" data-mdb-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-mdb-target="#adSquareCarousel" data-mdb-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-mdb-target="#adSquareCarousel" data-mdb-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-mdb-target="#adSquareCarousel" data-mdb-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
             </div>
         </div>
     </div>

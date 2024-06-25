@@ -35,14 +35,21 @@ namespace TomesNScrolls.Areas.Customer.Controllers
         }
         public IActionResult Details(int productId)
         {
-            ShoppingCart cart = new()
-            {
-                Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category,Rarity"),
-                Count = 1,
-                ProductId = productId
-            };
 
-            return View(cart);
+            HomeVM homeVM = new()
+            {
+                ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity"),
+                AdList = _unitOfWork.Advertisement.GetAll(),
+                ShoppingCart = new()
+                {
+                    Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category,Rarity"),
+                    Count = 1,
+                    ProductId = productId
+                }
+        };
+            
+
+            return View(homeVM);
         }
 
         [HttpPost]
@@ -82,6 +89,15 @@ namespace TomesNScrolls.Areas.Customer.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IEnumerable<Advertisement> randomizeAds()
+        {
+            var ads = _unitOfWork.Advertisement.GetAll();
+            return ads.OrderBy(a => Guid.NewGuid()).ToList();
+
+
+
         }
     }
 }
