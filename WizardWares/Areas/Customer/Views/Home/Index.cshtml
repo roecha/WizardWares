@@ -21,14 +21,18 @@
         margin-left: calc(-0.5 * var(--bs-gutter-x));
     }
 
+    .avoid-navbar {
+        margin-top: 100px;
+    }
+
 </style>
 
 <div class="container">
-    <div class="row g-5">
-        <div class="col-2 bg-black">
+    <div class="row g-5" >
+        <div class="col-2 bg-black avoid-navbar">
             <!-- This column can be used for additional content or left empty -->
         </div>
-        <div class="col-8">
+        <div class="col-8 avoid-navbar">
             <div class="row">
                 @foreach (var product in Model.ProductList)
                 {
@@ -58,33 +62,34 @@
             </div>
         </div>
 
-        <div class="col-2">
+        <div class="col-2 avoid-navbar">
 
             <div id="adTallCarousel" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
                 <div class="carousel-inner">
+                    @{
+                        bool isActive = false;
+                    }
                     @foreach (var ad in Model.AdList)
                     {
-                        if (ad.Sizing == "Active Tall")
+                        if (ad.Sizing == "Tall")
                         {
-
-                            <div class="carousel-item active">
-                                <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
-                                    <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                                </a>
-
-
-                            </div>
-
-                        }
-                        else if (ad.Sizing == "Tall")
-                        {
-
-                            <div class="carousel-item">
-                                <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
-                                    <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                                </a>
-
-                            </div>
+                            if (!isActive)
+                            {
+                                <div class="carousel-item active">
+                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                    </a>
+                                </div>
+                                isActive = true;
+                            }
+                            else
+                            {
+                                <div class="carousel-item">
+                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                    </a>
+                                </div>
+                            }
                         }
 
                     }
@@ -103,23 +108,30 @@
             <div class="mt-5">
                 <div id="adSquareCarousel" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
                     <div class="carousel-inner">
+                        @{
+                            isActive = false;
+                        }
                         @foreach (var ad in Model.AdList)
                         {
-                            if (ad.Sizing == "Active Square")
+                            if (ad.Sizing == "Square")
                             {
-                                <div class="carousel-item active">
-                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
-                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                                    </a>
-                                </div>
-                            }
-                            else if (ad.Sizing == "Square")
-                            {
-                                <div class="carousel-item">
-                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
-                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                                    </a>
-                                </div>
+                                if (!isActive)
+                                {
+                                    <div class="carousel-item active">
+                                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                            <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                        </a>
+                                    </div>
+                                    isActive = true;
+                                }
+                                else
+                                {
+                                    <div class="carousel-item">
+                                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                            <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                        </a>
+                                    </div>
+                                }
                             }
 
                         }

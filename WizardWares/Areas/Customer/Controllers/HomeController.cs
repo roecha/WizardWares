@@ -28,7 +28,7 @@ namespace TomesNScrolls.Areas.Customer.Controllers
             HomeVM homeVM = new()
             {
                 ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity"),
-                AdList = _unitOfWork.Advertisement.GetAll()
+                AdList = RandomPermutation(_unitOfWork.Advertisement.GetAll())
             };
 
             return View(homeVM);
@@ -39,7 +39,7 @@ namespace TomesNScrolls.Areas.Customer.Controllers
             HomeVM homeVM = new()
             {
                 ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity"),
-                AdList = _unitOfWork.Advertisement.GetAll(),
+                AdList = RandomPermutation(_unitOfWork.Advertisement.GetAll()),
                 ShoppingCart = new()
                 {
                     Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category,Rarity"),
@@ -49,7 +49,7 @@ namespace TomesNScrolls.Areas.Customer.Controllers
         };
             
 
-            return View(homeVM);
+             return View(homeVM);
         }
 
         [HttpPost]
@@ -91,13 +91,26 @@ namespace TomesNScrolls.Areas.Customer.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IEnumerable<Advertisement> randomizeAds()
+
+        /* This Method Randomizes my advertisements (stolen from 
+         * https://stackoverflow.com/questions/5807128/an-extension-method-on-ienumerable-needed-for-shuffling)
+         * */
+        static Random random = new Random();
+        public static IEnumerable<T> RandomPermutation<T>(IEnumerable<T> sequence)
         {
-            var ads = _unitOfWork.Advertisement.GetAll();
-            return ads.OrderBy(a => Guid.NewGuid()).ToList();
-
-
-
+            T[] retArray = sequence.ToArray();
+            for (int i = 0; i < retArray.Length - 1; i += 1)
+            {
+                int swapIndex = random.Next(i, retArray.Length);
+                if (swapIndex != i)
+                {
+                    T temp = retArray[i];
+                    retArray[i] = retArray[swapIndex];
+                    retArray[swapIndex] = temp;
+                }
+            }
+            return retArray;
         }
+
     }
 }

@@ -2,7 +2,7 @@
 
 <style>
     .mt-6 {
-        margin-top: 70px;
+        
     }
 </style>
 
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <div class="container mt-4 mb-4">
+                <div class="container mb-4" style="margin-top: 100px;">
                     <div class="card shadow border-0">
 
                         <div class="card-body">
@@ -73,23 +73,28 @@
 
                     <div id="adWideCarousel" class="carousel slide mt-3 mx-auto" data-mdb-ride="carousel" data-mdb-carousel-init style="width: 40%;">
                         <div class="carousel-inner">
-                            @foreach (var ad in randomizedAds)
+                            @{bool isActive = false;}
+                            @foreach (var ad in Model.AdList)
                             {
-                                if (ad.Sizing == "Active Wide")
+                                if (ad.Sizing == "Wide" && ad.Product.Id != Model.ShoppingCart.ProductId)
                                 {
-                                    <div class="carousel-item active">
-                                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
-                                            <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                                        </a>
-                                    </div>
-                                }
-                                else if (ad.Sizing == "Wide")
-                                {
-                                    <div class="carousel-item">
-                                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
-                                            <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                                        </a>
-                                    </div>
+                                    if (!isActive)
+                                    {
+                                        <div class="carousel-item active">
+                                            <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                                <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                            </a>
+                                        </div>
+                                        isActive = true;
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item">
+                                            <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                                <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                            </a>
+                                        </div>
+                                    }
                                 }
 
                             }
@@ -103,35 +108,46 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
+                        <p>Advertisement</p>
+
                     </div>
+
                 </div>
             </div>
             <div class="col-2">
 
-                <div id="adTallCarousel" class="carousel slide mt-6" data-mdb-ride="carousel" data-mdb-carousel-init>
+                <div id="adTallCarousel" class="carousel slide" data-mdb-ride="carousel" style="margin-top: 130px;" data-mdb-carousel-init>
                     <div class="carousel-inner">
-                        @foreach (var ad in randomizedAds)
+                        @{
+                           isActive = false;
+                        }
+                        @foreach (var ad in Model.AdList)
                         {
-                            if (ad.Sizing == "Active Tall")
+                            if (ad.Sizing == "Tall" && ad.Product.Id != Model.ShoppingCart.ProductId)
                             {
-                                <div class="carousel-item active">
-                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
-                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                                    </a>
-                                </div>
-                            }
-                            else if (ad.Sizing == "Tall")
-                            {
-                                <div class="carousel-item">
-                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
-                                        <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
-                                    </a>
-                                </div>
+                                if (!isActive)
+                                {
+                                    <div class="carousel-item active">
+                                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                            <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                        </a>
+                                    </div>
+                                    isActive = true;
+                                } else
+                                {
+                                    <div class="carousel-item">
+                                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@ad.Product.Id">
+                                            <img src="@ad.ImageUrl" class="d-block w-100" alt="@ad.Product.Name" />
+                                        </a>
+                                    </div>
+                                }
+                                
                             }
 
                         }
 
                     </div>
+
                     <button class="carousel-control-prev" type="button" data-mdb-target="#adTallCarousel" data-mdb-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
@@ -140,7 +156,11 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
+
                 </div>
+                <p>Advertisement</p>
+
+
 
             </div>
 
