@@ -14,7 +14,7 @@ html {
 
 html {
   position: relative;
-  min-height: 100%;
+  min-height: 100%; 
 }
 
 body {
@@ -29,4 +29,8 @@ body {
 
 .medieval-sharp {
     font-family: 'MedievalSharp', cursive;
+}
+
+.avoid-navbar {
+    margin-top: 100px;
 }

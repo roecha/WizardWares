@@ -21,18 +21,16 @@
         margin-left: calc(-0.5 * var(--bs-gutter-x));
     }
 
-    .avoid-navbar {
-        margin-top: 100px;
-    }
+    
 
 </style>
 
-<div class="container">
+<div class="container avoid-navbar">
     <div class="row g-5" >
-        <div class="col-2 bg-black avoid-navbar">
+        <div class="col-2 bg-black">
             <!-- This column can be used for additional content or left empty -->
         </div>
-        <div class="col-8 avoid-navbar">
+        <div class="col-8">
             <div class="row">
                 @foreach (var product in Model.ProductList)
                 {
@@ -46,7 +44,7 @@
                                         <i class="bi bi-coin"></i> @product.Price.ToString()
                                     </span>
                                 </p>
-                                <p class="text-center mb-0">-or-</p>
+                                <p class="text-center mb-0">Trade Offer:</p>
                                 <p class="text-center">
                                     <span>@product.TradeItem</span>
                                 </p>
@@ -62,7 +60,7 @@
             </div>
         </div>
 
-        <div class="col-2 avoid-navbar">
+        <div class="col-2">
 
             <div id="adTallCarousel" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
                 <div class="carousel-inner">

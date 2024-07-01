@@ -10,9 +10,22 @@ function loadDataTable() {
         "columns": [
             { data: 'name', "width": "20%" },
             { data: 'price', "width": "10%" },
-            { data: 'tradeItem', "width": "20%" },
+            { data: 'tradeItem', "width": "10%" },
             { data: 'rarity.name', "width": "10%" },
             { data: 'category.name', "width": "20%" },
+            {
+                data: 'imageUrl',
+                "render": function (data) {
+                    if (data) {
+                        return `<img src="${data}" width="50%" />`
+                    } else {
+                        return `<p>NULL</p>`
+                    }
+                },
+
+                "width": "5%"
+            },
+
 
             {
                 data: 'id',
