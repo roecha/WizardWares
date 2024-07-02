@@ -43,7 +43,7 @@ namespace WizardWares.Areas.Admin.Controllers
 
         }
 
-          [HttpPost]
+        [HttpPost]
         public IActionResult Upsert(Category category)
         {
             if (ModelState.IsValid)

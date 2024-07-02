@@ -12,6 +12,7 @@ namespace WizardWares.Models.ViewModels
 {
     public class HomeVM
     {
+        public string SortOrder { get; set; }
         [ValidateNever]
         public IEnumerable<Product> ProductList { get; set; }
         [ValidateNever]

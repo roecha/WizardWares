@@ -22,14 +22,32 @@ namespace TomesNScrolls.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder)
         {
+            
             // Create a view model to access both Products and Advertisements 
             HomeVM homeVM = new()
             {
                 ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity"),
-                AdList = RandomPermutation(_unitOfWork.Advertisement.GetAll())
+                AdList = RandomPermutation(_unitOfWork.Advertisement.GetAll()),
+                SortOrder = sortOrder
             };
+
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    homeVM.ProductList = homeVM.ProductList.OrderByDescending(i => i.Price);
+                    break;
+                case "price_asc":
+                    homeVM.ProductList = homeVM.ProductList.OrderBy(i => i.Price);
+                    break;
+                case "rarity_desc":
+                    homeVM.ProductList = homeVM.ProductList.OrderByDescending(i => i.Rarity.ValueOrder);
+                    break;
+                default:
+                    homeVM.ProductList = homeVM.ProductList.OrderBy(i => i.Rarity.ValueOrder);
+                    break;
+            }
 
             return View(homeVM);
         }

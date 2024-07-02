@@ -21,19 +21,87 @@
         margin-left: calc(-0.5 * var(--bs-gutter-x));
     }
 
+    .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 150px;
+    }
     
+
+
 
 </style>
 
-<div class="container avoid-navbar">
-    <div class="row g-5" >
-        <div class="col-2 bg-black">
-            <!-- This column can be used for additional content or left empty -->
+<div class="text-center">
+    <img src="~/images/banner.webp" alt="Wizard Wares Banner" class="w-75 mb-5 avoid-navbar shadow" style="height:auto; max-height:400px" />
+</div>
+
+<div class="container ">
+
+
+    <div class="row g-5">
+        <div class="col-2">
+            <form asp-controller="Home" asp-action="Index" method="get" class="sticky justify-content-center align-center">
+                <div>
+                    <h4 class="medieval-sharp">Sort By:</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrder" value="rarity_asc"
+                               id="rarity_asc" @(Model.SortOrder == "rarity_asc" ? "checked" : "")
+                               onchange="this.form.submit()" />
+                        <label class="form-check-label" for="rarity_asc"> Rarity: Low to High </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrder" value="rarity_desc"
+                               id="rarity_desc" @(Model.SortOrder == "rarity_desc" ? "checked" : "")
+                               onchange="this.form.submit()" />
+                        <label class="form-check-label" for="rarity_desc"> Rarity: High to Low </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrder" value="price_asc"
+                               id="price_asc" @(Model.SortOrder == "price_asc" ? "checked" : "")
+                               onchange="this.form.submit()" />
+                        <label class="form-check-label" for="price_asc"> Price: Low to High </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrder" value="price_desc"
+                               id="price_desc" @(Model.SortOrder == "price_desc" ? "checked" : "")
+                               onchange="this.form.submit()" />
+                        <label class="form-check-label" for="price_desc"> Price: High to Low </label>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h4 class="medieval-sharp">Filter By:</h4>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                        <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />
+                        <label class="form-check-label" for="flexCheckChecked">Checked checkbox</label>
+                    </div>
+                </div>
+            </form>
+
         </div>
         <div class="col-8">
             <div class="row">
+
+                @{
+                    // Used for adding names and descriptions of rarities
+                    var rarityValue = -1;
+                }
                 @foreach (var product in Model.ProductList)
                 {
+
+                    if (product.Rarity.ValueOrder != rarityValue && Model.SortOrder != null && Model.SortOrder.StartsWith("rarity"))
+                    {
+                        <div class="text-center border-top p-3" >
+                            <h2 class="medieval-sharp" style="color: @product.Rarity.ColorCode">@product.Rarity.Name</h2>
+                            <p>@product.Rarity.Description</p>
+                        </div>
+                    }
                     <div class="col-lg-3 col-sm-6">
                         <div class="card w-100 mb-3">
                             <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top rounded" style="border: 3px solid @product.Rarity.ColorCode; box-shadow: 0 0 1rem @product.Rarity.ColorCode" />
@@ -56,12 +124,16 @@
                             </div>
                         </div>
                     </div>
+
+                    // Update
+                    rarityValue = product.Rarity.ValueOrder;
                 }
             </div>
         </div>
 
-        <div class="col-2">
+        <div class="col-2 adSection">
 
+            <div class="sticky">
             <div id="adTallCarousel" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
                 <div class="carousel-inner">
                     @{
@@ -102,8 +174,12 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+            <p>Advertisement</p>
+            </div>
 
-            <div class="mt-5">
+
+            <div class="mt-5 sticky" style="top:615px">
+               
                 <div id="adSquareCarousel" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
                     <div class="carousel-inner">
                         @{
@@ -135,6 +211,7 @@
                         }
 
                     </div>
+
                     <button class="carousel-control-prev" type="button" data-mdb-target="#adSquareCarousel" data-mdb-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
@@ -144,6 +221,8 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+                <p>Advertisement</p>
+
             </div>
         </div>
     </div>
