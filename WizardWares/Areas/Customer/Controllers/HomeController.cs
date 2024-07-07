@@ -22,30 +22,82 @@ namespace TomesNScrolls.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index(string sortOrder)
+        public IActionResult Index(string sortOrder, string[] filterOptions)
         {
-            
+            // Initialize sort order to avoid null pointer
+            if (sortOrder == null)
+            {
+                sortOrder = "category";
+            }
+            var productList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity");
+
+            // Check if any filter options are selected (options on the left side of homepage)
+            if (filterOptions != null && filterOptions.Length > 0)
+            {
+                // Get a list of the categories selected
+                var selectedCategories = _unitOfWork.Category.GetAll()
+                            .Where(c => filterOptions.Contains(c.Name))
+                            .Select(c => c.Name)
+                            .ToList();
+
+                // Get a list of the rarities selected
+                var selectedRarities = _unitOfWork.Rarity.GetAll()
+                    .Where(r => filterOptions.Contains(r.Name))
+                    .Select(r => r.Name)
+                    .ToList();
+
+                // These statements use EF Core to filter the product list in the DB
+                // If both 1+ categories and 1+ rarities are selected
+                if (selectedCategories.Any() && selectedRarities.Any())
+                {
+                    productList = productList
+                        .Where(p => selectedCategories.Contains(p.Category.Name) && selectedRarities.Contains(p.Rarity.Name))
+                        .ToList();
+                }
+                // If only categories are selected
+                else if (selectedCategories.Any())
+                {
+                    productList = productList
+                        .Where(p => selectedCategories.Contains(p.Category.Name))
+                        .ToList();
+                }
+                // if only rarities are selected
+                else if (selectedRarities.Any())
+                {
+                    productList = productList
+                        .Where(p => selectedRarities.Contains(p.Rarity.Name))
+                        .ToList();
+                }
+            }
+
             // Create a view model to access both Products and Advertisements 
             HomeVM homeVM = new()
             {
-                ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,Rarity"),
+                ProductList = productList,
                 AdList = RandomPermutation(_unitOfWork.Advertisement.GetAll()),
-                SortOrder = sortOrder
+                CategoryList = _unitOfWork.Category.GetAll().OrderBy(i => i.DisplayOrder),
+                RarityList = _unitOfWork.Rarity.GetAll().OrderBy(i => i.ValueOrder),
+                SortOrder = sortOrder,
+                FilterOptions = filterOptions
             };
 
+            // Use EF Core to sort the products
             switch (sortOrder)
             {
                 case "price_desc":
-                    homeVM.ProductList = homeVM.ProductList.OrderByDescending(i => i.Price);
+                    homeVM.ProductList = homeVM.ProductList.OrderByDescending(u => u.Price);
                     break;
                 case "price_asc":
-                    homeVM.ProductList = homeVM.ProductList.OrderBy(i => i.Price);
+                    homeVM.ProductList = homeVM.ProductList.OrderBy(u => u.Price);
                     break;
                 case "rarity_desc":
-                    homeVM.ProductList = homeVM.ProductList.OrderByDescending(i => i.Rarity.ValueOrder);
+                    homeVM.ProductList = homeVM.ProductList.OrderByDescending(u => u.Rarity.ValueOrder);
+                    break;
+                case "rarity_asc":
+                    homeVM.ProductList = homeVM.ProductList.OrderBy(u => u.Rarity.ValueOrder);
                     break;
                 default:
-                    homeVM.ProductList = homeVM.ProductList.OrderBy(i => i.Rarity.ValueOrder);
+                    homeVM.ProductList = homeVM.ProductList.OrderBy(u => u.Category.DisplayOrder);
                     break;
             }
 
@@ -64,17 +116,16 @@ namespace TomesNScrolls.Areas.Customer.Controllers
                     Count = 1,
                     ProductId = productId
                 }
-        };
-            
+            };
 
-             return View(homeVM);
+            return View(homeVM);
         }
 
         [HttpPost]
         [Authorize]
         public IActionResult Details(ShoppingCart shoppingCart)
         {
-            
+
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             // This is where the user id will be stored when a user logs in
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -110,7 +161,7 @@ namespace TomesNScrolls.Areas.Customer.Controllers
         }
 
 
-        /* This Method Randomizes my advertisements (stolen from 
+        /* This Method Randomizes my advertisements (credit: 
          * https://stackoverflow.com/questions/5807128/an-extension-method-on-ienumerable-needed-for-shuffling)
          * */
         static Random random = new Random();
