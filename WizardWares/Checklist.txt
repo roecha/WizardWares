@@ -1,0 +1,4 @@
+﻿* make the filter and sort options remain when navigating back to the home
+* add a search feature in home
+* banner at the top of page
+*

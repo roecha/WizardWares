@@ -33,10 +33,38 @@
 </div>
 
 <div class="container ">
-
-
     <div class="row g-5">
         <div class="col-2">
+
+            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                Link with href
+            </a>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                Button with data-bs-target
+            </button>
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div>
+                        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+                    </div>
+                    <div class="dropdown mt-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <form asp-controller="Home" asp-action="Index" method="get" class="sticky justify-content-center align-center">
                 <div>
                     <h4 class="medieval-sharp">Sort By:</h4>
@@ -78,7 +106,8 @@
                     {
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="filterOptions" value="@category.Name" id="@category.Name"
-                            @(Model.FilterOptions != null && Model.FilterOptions.Contains(category.Name) ? "checked" : "") />
+                            @(Model.FilterOptions != null && Model.FilterOptions.Contains(category.Name) ? "checked" : "")
+                                   onchange="this.form.submit()" />
                             <label class="form-check-label" for="@category.Name">@category.Name</label>
                         </div>
                     }
@@ -88,7 +117,8 @@
                     {
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="filterOptions" value="@rarity.Name" id="@rarity.Name"
-                            @(Model.FilterOptions != null && Model.FilterOptions.Contains(rarity.Name) ? "checked" : "") />
+                            @(Model.FilterOptions != null && Model.FilterOptions.Contains(rarity.Name) ? "checked" : "") 
+                            onchange="this.form.submit()" />
                             <label class="form-check-label shadow" for="@rarity.Name"
                                    style="color:@rarity.ColorCode;">@rarity.Name</label>
                         </div>
@@ -101,7 +131,7 @@
 
         </div>
 
-        <div class="col-8">
+        <div class="col-lg-8 col-md-7">
             <div class="row">
 
                 @{
@@ -138,7 +168,7 @@
                             <div class="card-body">
                                 <p class="card-title h6 text-uppercase text-center" style="font-family: IM Fell English, serif;">@product.Name</p>
                                 <p class="text-center mb-0">
-                                    <span class="h5 text-success">
+                                    <span class="h5 text-warning">
                                         <i class="bi bi-coin"></i> @product.Price.ToString()
                                     </span>
                                 </p>
@@ -160,7 +190,7 @@
             </div>
         </div>
 
-        <div class="col-2 adSection">
+        <div class="col-lg-2 col-md-3 adSection">
 
             <div class="sticky">
                 <div id="adTallCarousel" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
@@ -256,3 +286,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        var scrollpos = localStorage.getItem('scrollpos');
+        var sortOrder = localStorage.getItem('sortOrder');
+        var filterBy = localStorage.getItem('filterBy');
+
+        if (scrollpos) window.scrollTo(0, scrollpos);
+        if (sortOrder) @Model.SortOrder = sortOrder;
+        if (filterBy) @Model.FilterOptions = filterBy;
+    });
+
+    window.onbeforeunload = function (e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+        localStorage.setItem('sortOrder', @Model.SortOrder);
+        localStorage.setItem('filterBy', @Model.FilterOptions);
+    };
+</script>
