@@ -32,40 +32,20 @@
     <img src="~/images/banner.webp" alt="Wizard Wares Banner" class="w-75 mb-5 avoid-navbar shadow" style="height:auto; max-height:400px" />
 </div>
 
-<div class="container ">
-    <div class="row g-5">
-        <div class="col-2">
+<div>
 
-            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                Link with href
-            </a>
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                Button with data-bs-target
-            </button>
+    <button class="btn btn-primary rounded shadow mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="offcanvas">
+        <i class="bi bi-sliders"></i> Wizarding Preferences
+    </button>
 
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div>
-                        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-                    </div>
-                    <div class="dropdown mt-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            Dropdown button
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
 
-            <form asp-controller="Home" asp-action="Index" method="get" class="sticky justify-content-center align-center">
+            <form asp-controller="Home" asp-action="Index" method="get">
+
                 <div>
                     <h4 class="medieval-sharp">Sort By:</h4>
                     <div class="form-check">
@@ -117,21 +97,25 @@
                     {
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="filterOptions" value="@rarity.Name" id="@rarity.Name"
-                            @(Model.FilterOptions != null && Model.FilterOptions.Contains(rarity.Name) ? "checked" : "") 
-                            onchange="this.form.submit()" />
+                            @(Model.FilterOptions != null && Model.FilterOptions.Contains(rarity.Name) ? "checked" : "")
+                                   onchange="this.form.submit()" />
                             <label class="form-check-label shadow" for="@rarity.Name"
                                    style="color:@rarity.ColorCode;">@rarity.Name</label>
                         </div>
                     }
                 </div>
                 <button class="btn btn-primary mt-2" type="submit">Apply Filters</button>
-
-
             </form>
-
         </div>
 
-        <div class="col-lg-8 col-md-7">
+    </div>
+
+</div>
+<div class="container">
+    <div class="row g-5">
+
+
+        <div class="col-lg-10 col-md-9">
             <div class="row">
 
                 @{
@@ -142,7 +126,7 @@
                 @foreach (var product in Model.ProductList)
                 {
 
-                    // Items sort by Category by default 
+                    // Items sort by Category by default
                     if (Model.SortOrder.Equals("category") && product.Category.DisplayOrder != categoryValue)
                     {
                         <div class="text-center border-top p-3 mb-3">
