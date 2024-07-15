@@ -87,7 +87,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="filterOptions" value="@category.Name" id="@category.Name"
                             @(Model.FilterOptions != null && Model.FilterOptions.Contains(category.Name) ? "checked" : "")
-                                   onchange="this.form.submit()" />
+                                   />
                             <label class="form-check-label" for="@category.Name">@category.Name</label>
                         </div>
                     }
@@ -98,13 +98,13 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="filterOptions" value="@rarity.Name" id="@rarity.Name"
                             @(Model.FilterOptions != null && Model.FilterOptions.Contains(rarity.Name) ? "checked" : "")
-                                   onchange="this.form.submit()" />
+                                   />
                             <label class="form-check-label shadow" for="@rarity.Name"
                                    style="color:@rarity.ColorCode;">@rarity.Name</label>
                         </div>
                     }
                 </div>
-                <button class="btn btn-primary mt-2" type="submit">Apply Filters</button>
+                <button class="btn btn-primary mt-2 rounded medieval-sharp" type="submit">Apply Filters</button>
             </form>
         </div>
 
@@ -147,7 +147,7 @@
 
 
                     <div class="col-lg-3 col-sm-6">
-                        <div class="card w-100 mb-3" style="height:auto;">
+                        <div class="card mb-3" style="height:auto;">
                             <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top rounded" style="border: 3px solid @product.Rarity.ColorCode; box-shadow: 0 0 1rem @product.Rarity.ColorCode" />
                             <div class="card-body">
                                 <p class="card-title h6 text-uppercase text-center" style="font-family: IM Fell English, serif;">@product.Name</p>

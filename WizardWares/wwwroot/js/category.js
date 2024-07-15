@@ -8,8 +8,9 @@ function loadDataTable() {
     return $('#tblData').DataTable({
         "ajax": { url: '/admin/category/getall' },
         "columns": [
-            { data: 'name', "width": "40%" },
-            { data: 'displayOrder', "width": "40%" },
+            { data: 'name', "width": "20%" },
+            { data: 'description', "width": "50%" },
+            { data: 'displayOrder', "width": "10%" },
             
 
             {

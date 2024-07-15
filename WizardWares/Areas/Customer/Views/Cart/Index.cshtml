@@ -2,15 +2,12 @@
 
 <form method="post">
     <br />
-    <div class="card shadow border-0">
-        <div class="card-header bg-secondary bg-gradient text-light ml-0 py-4">
-            <div class="row px-4">
-                <div class="col-6">
-                    <h5 class="pt-2 text-white">
-                        Shopping Cart
-                    </h5>
+    <div class="card shadow border-1 rounded avoid-navbar">
+        <div class="card-header rounded bg-gradient text-light ml-0">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white medieval-sharp py-2">Enchanted Cart of Mystical Wares</h2>
                 </div>
-
             </div>
         </div>
         <div class="card-body my-4">
@@ -64,13 +61,17 @@
 
                 </div>
             </div>
-            <div class="card-footer bg-white border-0">
+            <div class="card-footer bg-gradient border-0">
                 <div class="row">
                     <div class="col-md-4 offset-md-4">
                         <ul class="list-group mb-4">
                             <li class="d-flex justify-content-between align-items-center">
-                                <h5 class="text-dark fw-semibold text-uppercase"> Total (USD)</h5>
-                                <h4 class="text-dark fw-bolder">@Model.OrderTotal.ToString("c")</h4>
+                                <h5 class="fw-semibold text-uppercase"> Total gold</h5>
+                                <h4 class="fw-bolder">
+                                    <span class="h5 text-warning">
+                                        <i class="bi bi-coin"></i> @Model.OrderTotal.ToString()
+                                    </span>
+                                </h4>
                             </li>
                         </ul>
                     </div>
