@@ -25,13 +25,6 @@ namespace WizardWares.DataAccess.Data
             // You need this line for IdentityDbContext
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Potions", DisplayOrder = 1, ImageUrl = "" },
-                new Category { Id = 2, Name = "Spell Books", DisplayOrder = 2, ImageUrl = "" },
-                new Category { Id = 3, Name = "Wands", DisplayOrder = 3, ImageUrl = "" }
-
-            );
-
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {

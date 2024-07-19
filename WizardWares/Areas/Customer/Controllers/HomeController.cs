@@ -97,7 +97,7 @@ namespace TomesNScrolls.Areas.Customer.Controllers
                     homeVM.ProductList = homeVM.ProductList.OrderBy(u => u.Rarity.ValueOrder);
                     break;
                 default:
-                    homeVM.ProductList = homeVM.ProductList.OrderBy(u => u.Category.DisplayOrder);
+                    homeVM.ProductList = homeVM.ProductList.OrderBy(u => u.Rarity.ValueOrder).OrderBy(u => u.Category.DisplayOrder);
                     break;
             }
 

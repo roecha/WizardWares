@@ -1,5 +1,10 @@
 ﻿@model HomeVM
 
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
 <style>
     .container {
         --bs-gutter-x: 1.5rem;
@@ -26,6 +31,12 @@
         position: sticky;
         top: 150px;
     }
+
+    .card-hover:hover {
+        border: 4px, solid;
+        box-shadow: 0 0 1rem;
+    }
+
 </style>
 
 <div class="text-center">
@@ -146,27 +157,27 @@
                     }
 
 
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card mb-3" style="height:auto;">
-                            <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top rounded" style="border: 3px solid @product.Rarity.ColorCode; box-shadow: 0 0 1rem @product.Rarity.ColorCode" />
-                            <div class="card-body">
-                                <p class="card-title h6 text-uppercase text-center" style="font-family: IM Fell English, serif;">@product.Name</p>
-                                <p class="text-center mb-0">
-                                    <span class="h5 text-warning">
-                                        <i class="bi bi-coin"></i> @product.Price.ToString()
-                                    </span>
-                                </p>
-                                <p class="text-center mb-0">Trade Offer:</p>
-                                <p class="text-center">
-                                    <span>@product.TradeItem</span>
-                                </p>
-                                <div class="d-grid gap-2">
-                                    <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@product.Id" class="btn btn-outline-primary">
-                                        Details
-                                    </a>
+                    <div class="col-lg-3 col-sm-6 d-flex">
+                        <a asp-action="Details" asp-controller="Home" asp-area="Customer" asp-route-productId="@product.Id">
+                            <div class="card mb-3 card-hover rounded" style="height:auto; border-color: @product.Rarity.ColorCode;">
+                                <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top" style="border: 3px, solid, @product.Rarity.ColorCode; box-shadow: 0 0 1rem @product.Rarity.ColorCode;" />
+                                <div class="card-body">
+                                    <p class="card-title h6 text-uppercase text-center" style="font-family: IM Fell English, serif;">@product.Name</p>
+                                    <p class="text-center mb-0">
+                                        <span class="h5 text-warning">
+                                            <i class="bi bi-coin"></i> @product.Price.ToString()
+                                        </span>
+                                    </p>
+                                    <p class="text-center mb-0">Trade Offer:</p>
+                                    <p class="text-center">
+                                        <span>@product.TradeItem</span>
+                                    </p>
+                                    <div class="d-grid gap-2">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+                        
                     </div>
 
 
@@ -283,6 +294,7 @@
     });
 
     window.onbeforeunload = function (e) {
+        TempData["name"] = "Steve";
         localStorage.setItem('scrollpos', window.scrollY);
         localStorage.setItem('sortOrder', @Model.SortOrder);
         localStorage.setItem('filterBy', @Model.FilterOptions);
